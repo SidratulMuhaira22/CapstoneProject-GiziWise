@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">GiziWise</string>
+    <string name="costum_email">Masukkan Email</string>
+    <string name="costum_password">Masukkan Kata Sandi</string>
+    <string name="error_password">Kata sandi harus minimal 8</string>
+    <string name="error_email">Email harus valid</string>
+    <string name="costum_inputname">Masukkan Nama</string>
+    <string name="error_inputname">Nama wajib diisi</string>
+    <string name="login_button">MASUK</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="daftar">Daftar</string>
+    <string name="masuk">Masuk</string>
+    <string name="sudah_punya_akun">Sudah punya akun</string>
+    <string name="signup_button">DAFTAR</string>
+    <string name="gizewise_cd">GizeWise</string>
+    <string name="tittle_home">Beranda</string>
+    <string name="tittle_camera">Kamera</string>
+    <string name="tittle_article">Artikel</string>
+    <string name="tittle_recipe">Resep</string>
+    <string name="tittle_account">Akun</string>
+    <string name="search_home">Cari Nutrisi dengan Gambar</string>
+    <string name="imageview_camera">preview</string>
+    <string name="camera_button">KAMERA</string>
+    <string name="searchbutton_camera">CARI</string>
+    <string name="gallery_button">GALERI</string>
+    <string name="recomendation_home">Rekomendasi</string>
+    <string name="article_home">Artikel Kesehatan</string>
+    <string name="recipe_home">Resep Sehat</string>
+    <string name="giziwase_image">giziwase_image</string>
+</resources>
