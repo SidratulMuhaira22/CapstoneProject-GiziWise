@@ -29,8 +29,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.043"
+<<<<<<< HEAD
                 app:layout_constraintStart_toStartOf="parent"
                 android:contentDescription="@string/back" />
+=======
+                app:layout_constraintStart_toStartOf="parent"/>
+>>>>>>> ac05e2976b4cdf900c5465320b2d620c1ae3832a
 
             <ImageView
                 android:id="@+id/preview_image"

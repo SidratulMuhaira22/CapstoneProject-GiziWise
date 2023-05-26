@@ -12,5 +12,8 @@
     <color name="orange">#FFF17F15</color>
     <color name="grey">#FFB8B8B8</color>
     <color name="darkgrey">#FF1E1E1E</color>
+<<<<<<< HEAD
     <color name="coolgrey">#FF444444</color>
+=======
+>>>>>>> ac05e2976b4cdf900c5465320b2d620c1ae3832a
 </resources>
