@@ -4,12 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:id="@+id/navigation_articles"
+=======
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
     tools:context=".home.artikel.ArticleActivity">
 
     <EditText
         android:id="@+id/search_article"
+<<<<<<< HEAD
         android:layout_width="380dp"
+=======
+        android:layout_width="381dp"
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
         android:layout_height="54dp"
         android:background="@drawable/costum_input"
         android:drawableStart="@drawable/ic_search"
@@ -39,6 +46,7 @@
         app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_article"
+<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.059" />
 
     <ImageView
@@ -63,12 +71,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.0" />
+=======
+        app:layout_constraintVertical_bias="0.189" />
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
 
     <TextView
         android:id="@+id/tips_lainnya"
         android:layout_width="177dp"
         android:layout_height="33dp"
+<<<<<<< HEAD
         android:layout_marginBottom="260dp"
+=======
+        android:layout_marginBottom="276dp"
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
         android:fontFamily="@font/nunito_bold"
         android:text="@string/article_lainnya"
         android:textColor="@color/darkgrey"
@@ -80,6 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tips_diet"
         app:layout_constraintVertical_bias="1.0" />
 
+<<<<<<< HEAD
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="390dp"
         android:layout_height="169dp"
@@ -91,14 +107,26 @@
         app:layout_constraintTop_toTopOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.0" />
 
+=======
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:background="@android:color/white"
         app:itemIconSize="30dp"
         app:itemIconTint="@color/grey"
         app:itemTextColor="@color/grey"
+=======
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:backgroundTint="@color/green"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -3,11 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+=======
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+=======
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+>>>>>>> ac05e2976b4cdf900c5465320b2d620c1ae3832a
+        android:maxSdkVersion="18" />
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
 
     <application
         android:allowBackup="true"
@@ -20,6 +37,10 @@
         android:theme="@style/Theme.GiziWise"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
             android:name=".home.artikel.DetailArticleActivity"
             android:exported="false">
             <meta-data
@@ -35,13 +56,18 @@
         </activity>
         <activity
             android:name=".home.account.AccountActivity"
+<<<<<<< HEAD
             android:exported="false"
             android:label=" ">
+=======
+            android:exported="false">
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".home.account.EditAccountActivity"
             android:exported="false"
             android:label=" ">
@@ -67,6 +93,10 @@
         </activity>
         <activity
 
+=======
+=======
+>>>>>>> ac05e2976b4cdf900c5465320b2d620c1ae3832a
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
             android:name=".home.artikel.ArticleActivity"
             android:exported="false">
             <meta-data

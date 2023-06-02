@@ -1,5 +1,6 @@
 package com.hera.giziwise.home.camera
 
+<<<<<<< HEAD
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -78,3 +79,15 @@ class CameraActivity : Activity() {
     }
 }
 
+=======
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.hera.giziwise.R
+
+class CameraActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_camera)
+    }
+}
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c

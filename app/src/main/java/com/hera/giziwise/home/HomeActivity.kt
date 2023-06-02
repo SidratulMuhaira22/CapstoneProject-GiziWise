@@ -1,5 +1,6 @@
 package com.hera.giziwise.home
 
+<<<<<<< HEAD
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -93,3 +94,15 @@ class HomeActivity : AppCompatActivity() {
 
 
 
+=======
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.hera.giziwise.R
+
+class HomeActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home)
+    }
+}
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c

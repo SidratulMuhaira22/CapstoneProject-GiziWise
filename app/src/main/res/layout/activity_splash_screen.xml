@@ -8,6 +8,7 @@
 
     <ImageView
         android:id="@+id/imageView"
+<<<<<<< HEAD
         android:layout_width="311dp"
         android:layout_height="361dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,5 +17,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo"
         android:contentDescription="@string/giziwase_image"/>
+=======
+<<<<<<< HEAD
+        android:layout_width="363dp"
+        android:layout_height="438dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="24dp" />
+=======
+        android:layout_width="379dp"
+        android:layout_height="457dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="16dp" />
+>>>>>>> ac05e2976b4cdf900c5465320b2d620c1ae3832a
+>>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
 
 </androidx.constraintlayout.widget.ConstraintLayout>
