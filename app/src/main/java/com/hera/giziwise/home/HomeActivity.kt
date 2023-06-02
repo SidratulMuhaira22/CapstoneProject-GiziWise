@@ -36,28 +36,26 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // Set the initial icon colors
         setIconColors(R.id.navigation_home)
 
         bottomNavView.setOnNavigationItemReselectedListener { item ->
-            // Handle reselection of icons
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    // Do something when home icon is reselected
+
                 }
                 R.id.navigation_camera -> {
-                    // Do something when camera icon is reselected
+
                 }
                 R.id.navigation_account -> {
-                    // Do something when profile icon is reselected
+
                 }
             }
         }
     }
 
     private fun openHomeActivity() {
-        // Do something when home icon is clicked
-        setIconColors(R.id.navigation_home) // Set the home icon to green
+
+        setIconColors(R.id.navigation_home)
     }
 
     private fun openCameraActivity() {
@@ -66,7 +64,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun openAccountActivity() {
-        // Do something when profile icon is clicked
+
     }
 
     private fun setIconColors(selectedItemId: Int) {
@@ -84,7 +82,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Set the home icon to green
+
         setIconColors(R.id.navigation_home)
     }
 }
