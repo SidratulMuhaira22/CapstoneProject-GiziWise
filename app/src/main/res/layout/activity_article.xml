@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/search_article"
-        android:layout_width="381dp"
+        android:layout_width="380dp"
         android:layout_height="54dp"
         android:background="@drawable/costum_input"
         android:drawableStart="@drawable/ic_search"
