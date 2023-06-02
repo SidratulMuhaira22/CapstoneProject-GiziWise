@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    tools:context=".login.LoginActivity">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="347dp"
+        android:layout_height="180dp"
+        android:alpha="1"
+        android:src="@drawable/login"
+        app:layout_constraintBottom_toTopOf="@id/et_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:contentDescription="@string/gizewise_cd"/>
+
+    <com.hera.giziwise.ui.costumview.EditTextEmail
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:alpha="1"
+        android:background="@drawable/costum_input"
+        android:drawableStart="@drawable/costum_icon_email"
+        android:drawablePadding="12dp"
+        android:hint="@string/costum_email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.472"
+        android:textColorHint="@color/grey"/>
+
+    <com.hera.giziwise.ui.costumview.EditTextPassword
+        android:id="@+id/et_pass"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:alpha="1"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:drawableStart="@drawable/costum_icon_lock"
+        android:drawablePadding="12dp"
+        android:background="@drawable/costum_input"
+        android:inputType="textPassword"
+        android:hint="@string/costum_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_email"
+        android:textColorHint="@color/grey"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:alpha="1"
+        app:cornerRadius="10dp"
+        android:text="@string/login_button"
+        android:textSize="18sp"
+        app:circularflow_radiusInDP="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_pass" />
+
+    <TextView
+        android:id="@+id/tv_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:alpha="1"
+        android:text="@string/daftar"
+        android:textColor="@color/orange"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/tv_dont_have_acc"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+    <TextView
+        android:id="@+id/tv_dont_have_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:alpha="1"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="@string/belum_punya_akun"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
