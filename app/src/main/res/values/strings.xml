@@ -34,7 +34,6 @@
     <string name="recipe_home">Resep Sehat</string>
     <string name="giziwase_image">giziwase_image</string>
     <string name="history_name">Nama History</string>
-<<<<<<< HEAD
     <string name="back">back</string>
     <string name="result">Hasil :</string>
     <string name="edit_profile">Edit</string>
@@ -54,11 +53,4 @@
     <string name="tinggi_user">Tinggi</string>
     <string name="umur_user">Umur</string>
     <string name="article_image">article_image</string>
-=======
-<<<<<<< HEAD
-    <string name="back">back</string>
-    <string name="result">Hasil :</string>
-=======
->>>>>>> ac05e2976b4cdf900c5465320b2d620c1ae3832a
->>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
 </resources>

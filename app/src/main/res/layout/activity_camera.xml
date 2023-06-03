@@ -11,11 +11,7 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="1.0"
-=======
-        app:layout_constraintHorizontal_bias="0.0"
->>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
@@ -24,18 +20,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-<<<<<<< HEAD
 
-=======
->>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
             <ImageView
                 android:id="@+id/back"
                 android:layout_width="41dp"
                 android:layout_height="30dp"
-<<<<<<< HEAD
                 android:layout_marginBottom="560dp"
                 android:contentDescription="@string/back"
                 android:src="@drawable/ic_back"
+                android:onClick="goBack"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.04"
@@ -52,38 +45,11 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/imageview_camera"
                 app:layout_constraintEnd_toEndOf="parent"
-=======
-                android:layout_marginBottom="528dp"
-                android:src="@drawable/ic_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.043"
-<<<<<<< HEAD
-                app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="@string/back" />
-=======
-                app:layout_constraintStart_toStartOf="parent"/>
->>>>>>> ac05e2976b4cdf900c5465320b2d620c1ae3832a
-
-            <ImageView
-                android:id="@+id/preview_image"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="68dp"
-                android:layout_marginEnd="16dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/imageview_camera"
-                android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
->>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_image" />
 
             <com.google.android.material.button.MaterialButton
-<<<<<<< HEAD
                 android:id="@+id/btn_upload"
                 android:layout_width="379dp"
                 android:layout_height="55dp"
@@ -117,53 +83,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="496dp"
                 android:layout_marginBottom="8dp"
-=======
-                android:id="@+id/btn_gallery"
-                android:layout_width="174dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="400dp"
-                android:layout_marginEnd="16dp"
->>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
                 android:text="@string/gallery_button"
                 android:textSize="18sp"
                 app:circularflow_radiusInDP="10dp"
                 app:cornerRadius="10dp"
-<<<<<<< HEAD
                 app:layout_constraintBottom_toTopOf="@+id/btn_upload"
                 app:layout_constraintStart_toEndOf="@+id/btn_camera"
                 app:layout_constraintTop_toTopOf="parent" />
-=======
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/preview_image" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_upload"
-                android:layout_width="379dp"
-                android:layout_height="55dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="48dp"
-                android:text="@string/searchbutton_camera"
-                android:textSize="18sp"
-                app:circularflow_radiusInDP="10dp"
-                app:cornerRadius="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btn_camera" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_camera"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/camera_button"
-                android:textSize="18sp"
-                app:cornerRadius="10dp"
-                app:layout_constraintEnd_toStartOf="@+id/btn_gallery"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/preview_image" />
->>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

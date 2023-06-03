@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".home.account.AccountActivity">
 
-<<<<<<< HEAD
 
 <!--    <ScrollView-->
 <!--        android:layout_width="match_parent"-->
@@ -241,6 +240,4 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-=======
->>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
 </androidx.constraintlayout.widget.ConstraintLayout>

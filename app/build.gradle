@@ -71,9 +71,6 @@ dependencies {
     implementation "androidx.camera:camera-camera2:1.1.0-beta03"
     implementation "androidx.camera:camera-lifecycle:1.1.0-beta03"
     implementation "androidx.camera:camera-view:1.1.0-beta03"
-<<<<<<< HEAD
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-=======
->>>>>>> fb88542102a69986fc981672bbfbd5a22ff8583c
 }
