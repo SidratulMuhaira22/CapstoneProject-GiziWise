@@ -1,102 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".home.HomeActivity">
 
-    <ImageView
-        android:id="@+id/image_giziwise"
-        android:layout_width="411dp"
-        android:layout_height="242dp"
-        android:contentDescription="@string/giziwase_image"
-        android:src="@drawable/home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <TextView
-        android:id="@+id/rekomendasi"
-        android:layout_width="177dp"
-        android:layout_height="33dp"
-        android:layout_marginBottom="276dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/recomendation_home"
-        android:textColor="@color/darkgrey"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.592" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/artikel_kesehatan"
-        android:layout_width="177dp"
-        android:layout_height="33dp"
-        android:layout_marginBottom="276dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/article_home"
-        android:textColor="@color/green"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.687" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <TextView
-        android:id="@+id/resep_kesehatan"
-        android:layout_width="132dp"
-        android:layout_height="23dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/recipe_home"
-        android:textColor="@color/green"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.676" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/search_home"
-        android:layout_width="381dp"
-        android:layout_height="54dp"
-        android:background="@drawable/costum_input"
-        android:drawableStart="@drawable/ic_camera"
-        android:drawablePadding="12dp"
-        android:hint="@string/search_home"
-        android:inputType="textEmailAddress"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+            <ImageView
+                android:id="@+id/image_giziwise"
+                android:layout_width="411dp"
+                android:layout_height="242dp"
+                android:contentDescription="@string/giziwase_image"
+                android:src="@drawable/home"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/rekomendasi"
+                android:layout_width="177dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/recomendation_home"
+                android:textColor="@color/darkgrey"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.068"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_giziwise" />
+
+            <TextView
+                android:id="@+id/artikel_kesehatan"
+                android:layout_width="177dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="44dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/article_home"
+                android:textColor="@color/green"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.076"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_giziwise"
+                app:layout_constraintVertical_bias="0.002" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/article_kesehatan_recycler_view"
+                android:layout_width="394dp"
+                android:layout_height="138dp"
+                android:layout_marginBottom="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/resep_kesehatan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artikel_kesehatan"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/resep_kesehatan"
+                android:layout_width="132dp"
+                android:layout_height="23dp"
+                android:layout_marginTop="164dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/recipe_home"
+                android:textColor="@color/green"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.064"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artikel_kesehatan"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/resep_sehat_recycler_view"
+                android:layout_width="394dp"
+                android:layout_height="142dp"
+                android:layout_marginTop="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/resep_kesehatan"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/search_home"
+                android:layout_width="381dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/costum_input"
+                android:drawableStart="@drawable/ic_camera_search"
+                android:drawablePadding="20dp"
+                android:hint="@string/search_home"
+                android:importantForAutofill="no"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:onClick="openCameraActivity"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:inputType="none" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:backgroundTint="@color/green"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"
         app:itemIconSize="30dp"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
         app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@drawable/bottom_nav_icon_color"
+        app:itemTextColor="@drawable/bottom_nav_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_insetEdge="bottom" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

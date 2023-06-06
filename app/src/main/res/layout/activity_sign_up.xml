@@ -36,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.452" />
+        app:layout_constraintVertical_bias="0.452"
+        android:textColorHint="@color/grey" />
 
     <com.hera.giziwise.ui.costumview.EditTextEmail
         android:id="@+id/et_email"
@@ -53,7 +54,8 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_name" />
+        app:layout_constraintTop_toBottomOf="@id/et_name"
+        android:textColorHint="@color/grey"/>
 
     <com.hera.giziwise.ui.costumview.EditTextPassword
         android:id="@+id/et_pass"
@@ -70,7 +72,8 @@
         android:hint="@string/costum_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_email" />
+        app:layout_constraintTop_toBottomOf="@id/et_email"
+        android:textColorHint="@color/grey" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_signup"
@@ -79,7 +82,7 @@
         android:layout_marginTop="32dp"
         android:alpha="1"
         android:text="@string/signup_button"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

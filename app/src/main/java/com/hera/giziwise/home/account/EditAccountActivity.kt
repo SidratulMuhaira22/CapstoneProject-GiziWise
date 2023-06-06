@@ -1,20 +1,24 @@
 package com.hera.giziwise.home.account
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.graphics.Canvas
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.Menu
-
+import androidx.appcompat.app.AppCompatActivity
 import com.hera.giziwise.R
 
-class AccountActivity : AppCompatActivity() {
+class EditAccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_account)
+        setContentView(R.layout.activity_editaccount)
     }
 
     @Override
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        getMenuInflater().inflate(R.menu.account_menu, menu)
+        getMenuInflater().inflate(R.menu.editaccount_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+
 }

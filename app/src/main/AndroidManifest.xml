@@ -3,21 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera" />
-<<<<<<< HEAD
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-=======
-    <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
->>>>>>> ac05e2976b4cdf900c5465320b2d620c1ae3832a
-        android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -30,7 +20,6 @@
         android:theme="@style/Theme.GiziWise"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
             android:name=".home.artikel.DetailArticleActivity"
             android:exported="false">
             <meta-data
@@ -46,14 +35,46 @@
         </activity>
         <activity
             android:name=".home.account.AccountActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label=" ">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-=======
->>>>>>> ac05e2976b4cdf900c5465320b2d620c1ae3832a
+
+            android:name=".home.account.EditAccountActivity"
+            android:exported="false"
+            android:label=" ">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".home.recipe.RecipeActivity"
+            android:exported="false"
+            android:label=" ">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".home.recipe.BahanResepActivity"
+            android:exported="false"
+            android:label=" ">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".home.recipe.InstruksiResepActivity"
+            android:exported="false"
+            android:label=" ">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".home.artikel.ArticleActivity"
             android:exported="false">
             <meta-data

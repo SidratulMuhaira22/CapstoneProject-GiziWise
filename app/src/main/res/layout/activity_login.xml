@@ -37,6 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/grey"
         app:layout_constraintVertical_bias="0.472" />
 
     <com.hera.giziwise.ui.costumview.EditTextPassword
@@ -54,6 +55,7 @@
         android:hint="@string/costum_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="@color/grey"
         app:layout_constraintTop_toBottomOf="@id/et_email" />
 
     <com.google.android.material.button.MaterialButton
