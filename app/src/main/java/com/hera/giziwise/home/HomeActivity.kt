@@ -12,12 +12,27 @@ import com.hera.giziwise.home.recipe.RecipeActivity
 import com.hera.giziwise.home.account.AccountActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.view.forEach
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.hera.giziwise.api.ApiConfig
+import com.hera.giziwise.home.artikel.ArticleAdapter
+import com.hera.giziwise.home.recipe.Recipe
+import com.hera.giziwise.home.recipe.RecipeAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var bottomNavView: BottomNavigationView
     private lateinit var searchHomeEditText: EditText
+    private lateinit var articleRecyclerView: RecyclerView
+    private lateinit var recipeRecyclerView: RecyclerView
+    private lateinit var articleAdapter: ArticleAdapter
+    private lateinit var recipeAdapter: RecipeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +40,8 @@ class HomeActivity : AppCompatActivity() {
 
         bottomNavView = findViewById(R.id.nav_view)
         searchHomeEditText = findViewById(R.id.search_home)
+        articleRecyclerView = findViewById(R.id.article_kesehatan_recycler_view)
+        recipeRecyclerView = findViewById(R.id.resep_sehat_recycler_view)
 
         bottomNavView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -77,6 +94,63 @@ class HomeActivity : AppCompatActivity() {
         searchHomeEditText.setOnClickListener {
             openCameraActivity()
         }
+
+        // Inisialisasi RecyclerView dan Adapter untuk artikel
+        articleAdapter = ArticleAdapter()
+        articleRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        articleRecyclerView.adapter = articleAdapter
+
+        // Inisialisasi RecyclerView dan Adapter untuk resep
+        val recipeList = listOf<Recipe>() // Initialize an empty list or provide the actual recipe list
+        recipeAdapter = RecipeAdapter(recipeList)
+        recipeRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recipeRecyclerView.adapter = recipeAdapter
+
+        // Mengambil data artikel dan resep dari API
+        fetchArticles()
+        fetchRecipes()
+    }
+
+    private fun fetchArticles() {
+        val apiService = ApiConfig.getApiClient()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val response = apiService.getAllArticles("title", "desc", 1, 10, null, null)
+                if (response.isSuccessful) {
+                    val articleResponse = response.body()
+                    val articles = articleResponse?.data?.articles ?: emptyList()
+                    articleAdapter.updateData(articles)
+                } else {
+                    // Tangani kesalahan saat respons API tidak berhasil
+                    Toast.makeText(this@HomeActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                // Tangani kesalahan saat panggilan API gagal
+                Toast.makeText(this@HomeActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun fetchRecipes() {
+        val apiService = ApiConfig.getApiClient()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val response = apiService.getAllRecipes("title", "desc", 1, 10, null, null)
+                if (response.isSuccessful) {
+                    val recipeResponse = response.body()
+                    val recipes = recipeResponse?.data?.recipes ?: emptyList()
+                    recipeAdapter.updateData(recipes)
+                } else {
+                    // Tangani kesalahan saat respons API tidak berhasil
+                    Toast.makeText(this@HomeActivity, "Gagal memuat resep", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                // Tangani kesalahan saat panggilan API gagal
+                Toast.makeText(this@HomeActivity, "Gagal memuat resep", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun openHomeActivity() {
@@ -92,6 +166,7 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this, ArticleActivity::class.java)
         startActivity(intent)
     }
+
     private fun openRecipesActivity() {
         val intent = Intent(this, RecipeActivity::class.java)
         startActivity(intent)
@@ -119,3 +194,4 @@ class HomeActivity : AppCompatActivity() {
         setIconColors(R.id.navigation_home)
     }
 }
+

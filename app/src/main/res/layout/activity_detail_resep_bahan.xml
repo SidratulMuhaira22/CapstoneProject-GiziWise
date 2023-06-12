@@ -10,6 +10,8 @@
         android:id="@+id/back"
         android:layout_width="41dp"
         android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/back"
         android:src="@drawable/ic_back"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +27,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        android:padding="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,7 +36,7 @@
 
             <ImageView
                 android:id="@+id/preview_image"
-                android:layout_width="411dp"
+                android:layout_width="match_parent"
                 android:layout_height="291dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/imageview_camera"
@@ -50,8 +53,8 @@
                 android:id="@+id/result"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_marginLeft="16dp"
                 android:fontFamily="@font/nunito_bold"
+                android:text="@string/nama_resep"
                 android:textColor="@color/darkgrey"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -59,30 +62,26 @@
                 app:layout_constraintHorizontal_bias="0.727"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/preview_image"
-                app:layout_constraintVertical_bias="0.031"
-                android:text="@string/nama_resep"/>
+                app:layout_constraintVertical_bias="0.031" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:background="@drawable/rectangle"
-                app:layout_constraintTop_toBottomOf="@+id/result"
-                tools:layout_editor_absoluteX="-1dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/result">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/textView7"
                         android:layout_width="170dp"
                         android:layout_height="39dp"
-                        android:layout_marginStart="5dp"
                         android:layout_marginTop="4dp"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="6dp"
                         android:layout_weight="1"
                         android:background="@drawable/button_effect"
@@ -100,9 +99,7 @@
                         android:id="@+id/textView8"
                         android:layout_width="170dp"
                         android:layout_height="39dp"
-                        android:layout_marginStart="8dp"
                         android:layout_marginTop="4dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/button_effect2"
                         android:gravity="center"
@@ -120,16 +117,15 @@
             <TextView
                 android:id="@+id/bahan_bahan"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="16dp"
+                android:text="@string/bahan_resep"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.287"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                app:layout_constraintVertical_bias="0.0"
-                android:text="@string/bahan_resep" />
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

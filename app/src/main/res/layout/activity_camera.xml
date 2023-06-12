@@ -7,89 +7,105 @@
     tools:context=".home.camera.CameraActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="41dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="560dp"
-                android:contentDescription="@string/back"
-                android:src="@drawable/ic_back"
-                android:onClick="goBack"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.04"
-                app:layout_constraintStart_toStartOf="parent" />
-
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/preview_image"
-                android:layout_width="356dp"
-                android:layout_height="359dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/imageview_camera"
+                app:layout_constraintBottom_toTopOf="@+id/linear"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_image" />
 
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/btn_upload"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/preview_image">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_camera"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:text="@string/camera_button"
+                    android:textSize="18sp"
+                    app:cornerRadius="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_upload"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_gallery"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_gallery"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="@string/gallery_button"
+                    android:textSize="18sp"
+                    app:circularflow_radiusInDP="10dp"
+                    app:cornerRadius="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_upload"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_camera" />
+            </LinearLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_upload"
-                android:layout_width="379dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="556dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100dp"
                 android:text="@string/searchbutton_camera"
                 android:textSize="18sp"
                 app:circularflow_radiusInDP="10dp"
                 app:cornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.508"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_camera"
-                android:layout_width="189dp"
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="@string/camera_button"
-                android:textSize="18sp"
-                app:cornerRadius="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_upload"
-                app:layout_constraintStart_toStartOf="@+id/btn_upload"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/back"
+                android:onClick="goBack"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toTopOf="@+id/preview_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_gallery"
-                android:layout_width="174dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="496dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/gallery_button"
-                android:textSize="18sp"
-                app:circularflow_radiusInDP="10dp"
-                app:cornerRadius="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_upload"
-                app:layout_constraintStart_toEndOf="@+id/btn_camera"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

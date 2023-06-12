@@ -27,8 +27,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".home.camera.ResultActivity"
-            android:exported="false">
+            android:name=".home.camera.ResultActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -42,8 +41,15 @@
                 android:value="" />
         </activity>
         <activity
-
             android:name=".home.account.EditAccountActivity"
+            android:exported="false"
+            android:label=" ">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".home.account.HistoryActivity"
             android:exported="false"
             android:label=" ">
             <meta-data
