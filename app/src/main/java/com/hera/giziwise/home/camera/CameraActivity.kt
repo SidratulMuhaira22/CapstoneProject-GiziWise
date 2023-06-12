@@ -5,36 +5,48 @@ import android.os.Bundle
 import android.provider.MediaStore
 import com.google.android.material.button.MaterialButton
 import com.hera.giziwise.R
-import android.app.Activity
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.hera.giziwise.api.ApiConfig
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class CameraActivity : Activity() {
+class CameraActivity : AppCompatActivity() {
 
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_IMAGE_PICK = 2
     private val REQUEST_CAMERA_PERMISSION = 3
 
-    private lateinit var btnCamera: MaterialButton
-    private lateinit var btnGallery: MaterialButton
+    private lateinit var previewImage: ImageView
+
+    private var selectedImage: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
 
-        btnCamera = findViewById(R.id.btn_camera)
-        btnGallery = findViewById(R.id.btn_gallery)
+        previewImage = findViewById(R.id.preview_image)
 
-        btnCamera.setOnClickListener {
+        findViewById<MaterialButton>(R.id.btn_camera).setOnClickListener {
             checkCameraPermission()
         }
 
-        btnGallery.setOnClickListener {
+        findViewById<MaterialButton>(R.id.btn_gallery).setOnClickListener {
             openGallery()
+        }
+
+        findViewById<MaterialButton>(R.id.btn_upload).setOnClickListener {
+            uploadImage()
         }
     }
 
@@ -58,6 +70,69 @@ class CameraActivity : Activity() {
         startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK)
     }
 
+    private fun uploadImage() {
+        if (selectedImage != null) {
+            val imageRequestBody = ImageUtils.createImageRequestBody(selectedImage!!)
+            val apiService = ApiConfig.getApiClient()
+
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = apiService.searchProductByImage(imageRequestBody)
+                    if (response.isSuccessful) {
+                        val productResponse = response.body()
+                        val statusCode = productResponse?.statusCode
+                        val messages = productResponse?.messages
+                        val productData = productResponse?.data
+
+                        withContext(Dispatchers.Main) {
+                            val intent = Intent(this@CameraActivity, ResultActivity::class.java)
+
+                            if (statusCode == 200) {
+                                val products = productData?.products
+                                if (products != null && products.isNotEmpty()) {
+                                    val product = products[0]
+                                    val productName = product.name
+                                    val productImage = product.image
+                                    val productTkpis = product.tkpis
+
+                                    intent.putExtra("productName", productName)
+                                    intent.putExtra("productImage", productImage)
+                                    intent.putExtra("productTkpis", productTkpis)
+
+                                    Toast.makeText(applicationContext, "Product found: $productName", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    intent.putExtra("productName", "")
+                                    intent.putExtra("productImage", "")
+                                    intent.putExtra("productTkpis", "")
+
+                                    Toast.makeText(applicationContext, "No matching products found", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                intent.putExtra("productName", "")
+                                intent.putExtra("productImage", "")
+                                intent.putExtra("productTkpis", "")
+
+                                Toast.makeText(applicationContext, "Error: $messages", Toast.LENGTH_SHORT).show()
+                            }
+
+                            startActivity(intent)
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(applicationContext, "Upload failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(applicationContext, "Upload failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
@@ -72,9 +147,14 @@ class CameraActivity : Activity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            previewImage.setImageBitmap(imageBitmap)
+            selectedImage = imageBitmap
         } else if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
-
+            val imageUri = data?.data
+            val imageBitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
+            previewImage.setImageBitmap(imageBitmap)
+            selectedImage = imageBitmap
         }
     }
 
@@ -82,3 +162,5 @@ class CameraActivity : Activity() {
         finish()
     }
 }
+
+
