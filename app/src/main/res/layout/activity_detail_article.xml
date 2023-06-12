@@ -8,15 +8,16 @@
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="41dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="684dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/back"
+        android:onClick="goBack"
         android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/back" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,7 +35,7 @@
 
             <ImageView
                 android:id="@+id/preview_image"
-                android:layout_width="411dp"
+                android:layout_width="match_parent"
                 android:layout_height="291dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/imageview_camera"
@@ -49,8 +50,10 @@
 
             <TextView
                 android:id="@+id/title_article"
-                android:layout_width="383dp"
+                android:layout_width="match_parent"
                 android:layout_height="23dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/nunito_bold"
                 android:textColor="@color/darkgrey"
                 android:textSize="20sp"
@@ -63,8 +66,10 @@
 
             <TextView
                 android:id="@+id/published"
-                android:layout_width="384dp"
+                android:layout_width="match_parent"
                 android:layout_height="14dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/nunito_semibold"
                 android:textColor="@color/coolgrey"
                 android:textSize="10sp"
@@ -78,9 +83,11 @@
 
             <TextView
                 android:id="@+id/content_article"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="360dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="360dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.491"

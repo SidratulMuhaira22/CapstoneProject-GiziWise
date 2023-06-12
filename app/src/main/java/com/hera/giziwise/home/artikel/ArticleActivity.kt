@@ -113,7 +113,7 @@ class ArticleActivity : AppCompatActivity() {
                     ColorStateList.valueOf(
                         ContextCompat.getColor(
                             this,
-                            R.color.grey
+                            R.color.green
                         )
                     )
                 )
