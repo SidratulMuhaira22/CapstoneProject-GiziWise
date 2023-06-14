@@ -87,13 +87,11 @@ class CameraActivity : AppCompatActivity() {
                         withContext(Dispatchers.Main) {
                             val intent = Intent(this@CameraActivity, ResultActivity::class.java)
 
-                            if (statusCode == 200) {
-                                val products = productData?.products
-                                if (products != null && products.isNotEmpty()) {
-                                    val product = products[0]
-                                    val productName = product.name
-                                    val productImage = product.image
-                                    val productTkpis = product.tkpis
+                            if (statusCode == 201) {
+                                if (productData != null) {
+                                    val productName = productData.name
+                                    val productImage = productData.image
+                                    val productTkpis = productData.tkpis
 
                                     intent.putExtra("productName", productName)
                                     intent.putExtra("productImage", productImage)
@@ -124,6 +122,7 @@ class CameraActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
+                        Log.e("GiziWise", e.message, e)
                         Toast.makeText(applicationContext, "Upload failed", Toast.LENGTH_SHORT).show()
                     }
                 }

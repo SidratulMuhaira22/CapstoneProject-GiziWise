@@ -3,7 +3,7 @@ package com.hera.giziwise.home.camera
 data class ProductResponse(
     val statusCode: Int,
     val messages: List<String>,
-    val data: ProductData
+    val data: Product
 )
 
 data class ProductData(
