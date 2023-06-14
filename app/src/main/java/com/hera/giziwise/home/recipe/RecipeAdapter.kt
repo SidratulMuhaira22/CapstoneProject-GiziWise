@@ -1,5 +1,6 @@
 package com.hera.giziwise.home.recipe
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,8 @@ class RecipeAdapter(private var recipeList: List<Recipe>) : RecyclerView.Adapter
 
         fun bind(recipe: Recipe) {
             recipeTitle.text = recipe.title
+            recipeTitle.maxLines = 2
+            recipeTitle.ellipsize = TextUtils.TruncateAt.END
 
             Glide.with(itemView)
                 .load(recipe.image)

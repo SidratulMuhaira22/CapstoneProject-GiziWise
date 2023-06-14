@@ -50,7 +50,7 @@
                 app:srcCompat="@drawable/ic_image" />
 
             <TextView
-                android:id="@+id/result"
+                android:id="@+id/resep_title"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:fontFamily="@font/nunito_bold"
@@ -71,7 +71,7 @@
                 android:background="@drawable/rectangle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/result">
+                app:layout_constraintTop_toBottomOf="@+id/resep_title">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

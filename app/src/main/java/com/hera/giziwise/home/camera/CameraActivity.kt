@@ -91,7 +91,9 @@ class CameraActivity : AppCompatActivity() {
                                 if (productData != null) {
                                     val productName = productData.name
                                     val productImage = productData.image
-                                    val productTkpis = productData.tkpis
+                                    val productTkpis = productData.tkpis.joinToString(separator = "\n") { tkpi ->
+                                        "${tkpi.name}: ${tkpi.value} ${tkpi.unit}"
+                                    }
 
                                     intent.putExtra("productName", productName)
                                     intent.putExtra("productImage", productImage)

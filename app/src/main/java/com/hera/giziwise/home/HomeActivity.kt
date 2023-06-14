@@ -17,7 +17,9 @@ import androidx.core.view.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hera.giziwise.api.ApiConfig
+import com.hera.giziwise.home.artikel.Article
 import com.hera.giziwise.home.artikel.ArticleAdapter
+import com.hera.giziwise.home.artikel.DetailArticleActivity
 import com.hera.giziwise.home.recipe.Recipe
 import com.hera.giziwise.home.recipe.RecipeAdapter
 import kotlinx.coroutines.CoroutineScope
@@ -96,7 +98,11 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // Inisialisasi RecyclerView dan Adapter untuk artikel
-        articleAdapter = ArticleAdapter()
+        articleAdapter = ArticleAdapter(object : ArticleAdapter.ArticleClickListener {
+            override fun onArticleClick(article: Article) {
+                openDetailArticleActivity(article)
+            }
+        })
         articleRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         articleRecyclerView.adapter = articleAdapter
 
@@ -177,6 +183,16 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun openDetailArticleActivity(article: Article) {
+        val intent = Intent(this, DetailArticleActivity::class.java)
+        intent.putExtra("ARTICLE_ID", article.id)
+        intent.putExtra("ARTICLE_TITLE", article.title)
+        intent.putExtra("ARTICLE_CREATED_AT", article.createdAt)
+        intent.putExtra("ARTICLE_CONTENT", article.content)
+        intent.putExtra("ARTICLE_IMAGE_URL", article.image)
+        startActivity(intent)
+    }
+
     private fun setIconColors(selectedItemId: Int) {
         val menu = bottomNavView.menu
         menu.forEach { item ->
@@ -193,5 +209,12 @@ class HomeActivity : AppCompatActivity() {
         super.onResume()
         setIconColors(R.id.navigation_home)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 }
+
+
 
