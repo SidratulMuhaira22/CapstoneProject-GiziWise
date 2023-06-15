@@ -1,11 +1,9 @@
 package com.hera.giziwise.home
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.hera.giziwise.R
 import com.hera.giziwise.home.camera.CameraActivity
 import com.hera.giziwise.home.artikel.ArticleActivity
@@ -14,7 +12,6 @@ import com.hera.giziwise.home.account.AccountActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.view.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hera.giziwise.api.ApiConfig
@@ -178,11 +175,6 @@ class HomeActivity : AppCompatActivity() {
         intent.putExtra("RECIPE_IMAGE_URL", recipe.image)
         intent.putExtra("RECIPE_INSTRUCTIONS", recipe.instructions)
         startActivity(intent)
-    }
-
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onBackPressed() {

@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.forEach
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hera.giziwise.R
@@ -16,8 +13,6 @@ import com.hera.giziwise.api.ApiConfig
 import com.hera.giziwise.home.HomeActivity
 import com.hera.giziwise.home.account.AccountActivity
 import com.hera.giziwise.home.artikel.ArticleActivity
-import com.hera.giziwise.home.artikel.ArticleAdapter
-import com.hera.giziwise.home.artikel.DetailArticleActivity
 import com.hera.giziwise.home.camera.CameraActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +31,7 @@ class RecipeActivity : AppCompatActivity() {
 
         recipeAdapter = RecipeAdapter(emptyList(), object : RecipeAdapter.RecipeClickListener {
             override fun onRecipeClick(recipe: Recipe) {
-                // Handle recipe item click event here
+                openDetailRecipeActivity(recipe)
             }
         })
 
@@ -45,34 +40,25 @@ class RecipeActivity : AppCompatActivity() {
 
         fetchRecipes()
 
-        // NavigationBar
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
         bottomNavigationView.selectedItemId = R.id.navigation_recipes
         bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    startActivity(Intent(applicationContext, HomeActivity::class.java))
-                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
-                    finish()
+                    openHomeActivity()
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_camera -> {
-                    startActivity(Intent(applicationContext, CameraActivity::class.java))
-                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
-                    finish()
+                    openCameraActivity()
                     return@setOnItemSelectedListener true
                 }
-                R.id.navigation_articles-> {
-                    startActivity(Intent(applicationContext, ArticleActivity::class.java))
-                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
-                    finish()
+                R.id.navigation_articles -> {
+                    openArticleActivity()
                     return@setOnItemSelectedListener true
                 }
-                R.id.navigation_recipes-> return@setOnItemSelectedListener true
+                R.id.navigation_recipes -> return@setOnItemSelectedListener true
                 R.id.navigation_account -> {
-                    startActivity(Intent(applicationContext, AccountActivity::class.java))
-                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
-                    finish()
+                    openAccountActivity()
                     return@setOnItemSelectedListener true
                 }
             }
@@ -90,15 +76,12 @@ class RecipeActivity : AppCompatActivity() {
                     val recipeResponse = response.body()
                     val recipes = recipeResponse?.data?.recipes ?: emptyList()
 
-                    // Set isRecipeActivity flag to true for RecipeAdapter
                     recipeAdapter.setRecipeActivity(true)
                     recipeAdapter.updateData(recipes)
                 } else {
-                    // Handle API response error here
                     Toast.makeText(this@RecipeActivity, "Failed to fetch recipes", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                // Handle API call failure here
                 Toast.makeText(this@RecipeActivity, "Failed to fetch recipes", Toast.LENGTH_SHORT).show()
             }
         }
@@ -126,6 +109,18 @@ class RecipeActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    private fun openDetailRecipeActivity(recipe: Recipe) {
+        val intent = Intent(this, BahanRecipeActivity::class.java)
+        intent.putExtra("RECIPE_ID", recipe.id)
+        intent.putExtra("RECIPE_TITLE", recipe.title)
+        intent.putExtra("RECIPE_INGREDIENTS", recipe.ingredients)
+        intent.putExtra("RECIPE_IMAGE_URL", recipe.image)
+        intent.putExtra("RECIPE_INSTRUCTIONS", recipe.instructions)
+        startActivity(intent)
+    }
 }
+
+
 
 

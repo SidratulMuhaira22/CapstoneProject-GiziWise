@@ -6,14 +6,6 @@ data class ProductResponse(
     val data: Product
 )
 
-data class ProductData(
-    val products: List<Product>,
-    val page: Int,
-    val limit: Int,
-    val totalData: Int,
-    val totalPage: Int
-)
-
 data class Product(
     val id: Int,
     val code: String,

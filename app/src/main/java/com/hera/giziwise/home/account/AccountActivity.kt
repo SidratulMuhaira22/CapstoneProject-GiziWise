@@ -33,7 +33,6 @@ class AccountActivity : AppCompatActivity() {
         binding.btnKeluar.setOnClickListener {
             firebaseAuth.signOut()
 
-            // Hapus status login dari Shared Preferences
             val editor = sharedPreferences.edit()
             editor.putBoolean("is_logged_in", false)
             editor.apply()
@@ -42,7 +41,7 @@ class AccountActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        // NavigationBar
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
         bottomNavigationView.selectedItemId = R.id.navigation_account
         bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
@@ -79,7 +78,7 @@ class AccountActivity : AppCompatActivity() {
 
     @Override
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        getMenuInflater().inflate(R.menu.account_menu, menu)
+        menuInflater.inflate(R.menu.account_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 }

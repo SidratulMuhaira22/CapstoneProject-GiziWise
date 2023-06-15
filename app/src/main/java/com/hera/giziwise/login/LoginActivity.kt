@@ -27,7 +27,6 @@ class LoginActivity : AppCompatActivity() {
 
         val isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)
 
-        // Jika status login adalah "logged_in", lanjutkan ke halaman berikutnya
         if (isLoggedIn) {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)

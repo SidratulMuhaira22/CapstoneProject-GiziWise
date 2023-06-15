@@ -30,10 +30,8 @@ class ResultActivity : AppCompatActivity() {
 
         productNameTextView.text = productName
 
-        // Enable JavaScript for the WebView
         productTkpisWebView.settings.javaScriptEnabled = true
 
-        // Load the HTML content into the WebView
         if (productTkpis != null) {
             productTkpisWebView.loadData(productTkpis, "text/html", "UTF-8")
         }

@@ -55,7 +55,6 @@ class ArticleAdapter(private val articleClickListener: ArticleClickListener) : R
             articleTitle.maxLines = 2
             articleTitle.ellipsize = TextUtils.TruncateAt.END
 
-            // Memuat dan menampilkan gambar menggunakan Glide
             Glide.with(itemView)
                 .load(article.image)
                 .into(articleImage)

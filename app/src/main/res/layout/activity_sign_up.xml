@@ -14,7 +14,7 @@
         android:alpha="1"
         android:contentDescription="@string/gizewise_cd"
         android:scaleType="fitEnd"
-        android:src="@drawable/ic_person"
+        android:src="@drawable/signup"
         app:layout_constraintBottom_toTopOf="@id/et_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"

@@ -30,7 +30,7 @@
                 android:layout_gravity="top"
                 android:contentDescription="@string/giziwase_image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_person"
+                android:src="@drawable/home"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

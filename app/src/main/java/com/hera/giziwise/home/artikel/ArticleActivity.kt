@@ -13,8 +13,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -42,43 +40,63 @@ class ArticleActivity : AppCompatActivity(), ArticleAdapter.ArticleClickListener
         articleRecyclerView = findViewById(R.id.recyclerView_lainnya)
         imageView2 = findViewById(R.id.imageView2)
 
-
         val textView: TextView = findViewById(R.id.textView)
-        val imageUrl = "sehat-3832311830.jpg"
+        val apiService = ApiConfig.getApiClient()
 
-        Glide.with(this)
-            .load(imageUrl)
-            .into(imageView2)
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val response = apiService.getArticleById(2)
+                if (response.isSuccessful) {
+                    val articleResponse = response.body()
+                    val article = articleResponse?.data
 
-        // Setel teks artikel
-        val articleText = "Pola dan gaya hidup modern cukup berpengaruh terhadap perubahan pola makan yang sering dikonsumsi sehari-hari."
-        val spannableString = SpannableString(articleText)
+                    Glide.with(applicationContext)
+                        .load(article?.image)
+                        .into(imageView2)
 
-        // Tambahkan ClickableSpan untuk teks
-        val clickableSpan = object : ClickableSpan() {
-            override fun onClick(widget: View) {
-                openDetailArticleActivity(imageUrl, getString(R.string.isi_artikel))
+                    val clickableSpan = object : ClickableSpan() {
+                        override fun onClick(widget: View) {
+                            if (article != null) {
+                                openDetailArticleActivity(article)
+                            }
+                        }
+                    }
+
+                    object : ClickableSpan() {
+                        override fun onClick(widget: View) {
+                            if (article != null) {
+                                openDetailArticleActivity(article)
+                            }
+                        }
+                    }
+                    article?.summary?.let {
+                        val spannableString = SpannableString(it)
+                        spannableString.setSpan(
+                            clickableSpan,
+                            0,
+                            it.length,
+                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                        )
+                        textView.text = spannableString
+                        textView.movementMethod = LinkMovementMethod.getInstance()
+                        textView.highlightColor = Color.TRANSPARENT  // Menghilangkan highlight saat teks diklik
+                    }
+                    textView.setOnClickListener {
+                        if (article != null) {
+                            openDetailArticleActivity(article)
+                        }
+                    }
+                    imageView2.setOnClickListener {
+                        if (article != null) {
+                            openDetailArticleActivity(article)
+                        }
+                    }
+                } else {
+                    Toast.makeText(this@ArticleActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@ArticleActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
             }
-        }
-        spannableString.setSpan(clickableSpan, 0, articleText.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        // Tambahkan ClickableSpan untuk gambar
-        val clickableImageSpan = object : ClickableSpan() {
-            override fun onClick(widget: View) {
-                openDetailArticleActivity(imageUrl, getString(R.string.isi_artikel))
-            }
-        }
-        spannableString.setSpan(clickableImageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        // Setel teks dan gambar ke TextView
-        textView.text = spannableString
-        textView.movementMethod = LinkMovementMethod.getInstance()
-        textView.highlightColor = Color.TRANSPARENT  // Menghilangkan highlight saat teks diklik
-        textView.setOnClickListener {
-            openDetailArticleActivity(imageUrl, getString(R.string.isi_artikel))
-        }
-        imageView2.setOnClickListener {
-            openDetailArticleActivity(imageUrl, getString(R.string.isi_artikel))
         }
 
         // Inisialisasi RecyclerView dan Adapter untuk artikel
@@ -87,9 +105,7 @@ class ArticleActivity : AppCompatActivity(), ArticleAdapter.ArticleClickListener
         articleRecyclerView.adapter = articleAdapter
 
         fetchArticles()
-        fetchArticles1()
 
-        // NavigationBar
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
         bottomNavigationView.selectedItemId = R.id.navigation_articles
         bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
@@ -125,13 +141,16 @@ class ArticleActivity : AppCompatActivity(), ArticleAdapter.ArticleClickListener
     }
 
     override fun onArticleClick(article: Article) {
-        openDetailArticleActivity(article.image, article.content)
+        openDetailArticleActivity(article)
     }
 
-    private fun openDetailArticleActivity(imageUrl: String?, articleContent: String) {
+    private fun openDetailArticleActivity(article: Article) {
         val intent = Intent(this, DetailArticleActivity::class.java)
-        intent.putExtra("ARTICLE_IMAGE_URL", imageUrl)
-        intent.putExtra("ARTICLE_CONTENT", articleContent)
+        intent.putExtra("ARTICLE_ID", article.id)
+        intent.putExtra("ARTICLE_TITLE", article.title)
+        intent.putExtra("ARTICLE_CREATED_AT", article.createdAt)
+        intent.putExtra("ARTICLE_CONTENT", article.content)
+        intent.putExtra("ARTICLE_IMAGE_URL", article.image)
         startActivity(intent)
     }
 
@@ -145,51 +164,15 @@ class ArticleActivity : AppCompatActivity(), ArticleAdapter.ArticleClickListener
                     val articleResponse = response.body()
                     val articles = articleResponse?.data?.articles ?: emptyList()
 
-                    // Menghapus artikel dengan ID 2
                     val filteredArticles = articles.filter { article -> article.id != 2 }
 
-                    // Membalikkan urutan daftar artikel
                     val reversedArticles = filteredArticles.reversed()
 
                     articleAdapter.updateData(reversedArticles)
                 } else {
-                    // Tangani kesalahan saat respons API tidak berhasil
                     Toast.makeText(this@ArticleActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                // Tangani kesalahan saat panggilan API gagal
-                Toast.makeText(this@ArticleActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun fetchArticles1() {
-        val apiService = ApiConfig.getApiClient()
-
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val response = apiService.getAllArticles("title", "desc", 1, 10, null, null)
-                if (response.isSuccessful) {
-                    val articleResponse = response.body()
-                    val articles = articleResponse?.data?.articles ?: emptyList()
-
-                    // Cari artikel dengan ID 9
-                    val articleId9 = articles.find { it.id == 2 }
-                    if (articleId9 != null) {
-                        // Jika artikel dengan ID 9 ditemukan, ambil URL gambarnya
-                        val imageUrl = articleId9.image
-
-                        // Muat gambar menggunakan Glide ke imageView2
-                        Glide.with(this@ArticleActivity)
-                            .load(imageUrl)
-                            .into(imageView2)
-                    }
-                } else {
-                    // Tangani kesalahan saat respons API tidak berhasil
-                    Toast.makeText(this@ArticleActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
-                }
-            } catch (e: Exception) {
-                // Tangani kesalahan saat panggilan API gagal
                 Toast.makeText(this@ArticleActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
             }
         }

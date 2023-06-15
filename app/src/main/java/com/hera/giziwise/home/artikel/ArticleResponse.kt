@@ -1,8 +1,5 @@
 package com.hera.giziwise.home.artikel
 
-import android.text.Spanned
-import android.webkit.WebView
-
 data class ArticleResponse(
     val statusCode: Int,
     val messages: List<String>,
@@ -42,4 +39,10 @@ data class Tag(
 
 data class Author(
     val name: String
+)
+
+data class ArticleDetailResponse(
+    val statusCode: Int,
+    val messages: List<String>,
+    val data: Article
 )

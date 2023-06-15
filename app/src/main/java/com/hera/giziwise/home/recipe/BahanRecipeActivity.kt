@@ -35,10 +35,9 @@ class BahanRecipeActivity : AppCompatActivity() {
         recipeInstruction = intent.getStringExtra("RECIPE_INSTRUCTIONS").toString()
         recipeImageUrl = intent.getStringExtra("RECIPE_IMAGE_URL").toString()
 
-        // Tampilkan data pada tampilan
         recipeTitle?.let { setTitle(it) }
         recipeIngredients?.let { setIngredients(it) }
-        recipeImageUrl?.let { setRecipeImage(it) }
+        recipeImageUrl.let { setRecipeImage(it) }
     }
 
     private fun setTitle(title: String) {
@@ -56,7 +55,6 @@ class BahanRecipeActivity : AppCompatActivity() {
     }
 
     fun buttonInstruksi(view: View) {
-        // Tambahkan intent untuk membuka halaman instruksi
         val intent = Intent(this, InstruksiRecipeActivity::class.java)
         intent.putExtra("RECIPE_TITLE", recipeTitle.text.toString())
         intent.putExtra("RECIPE_INSTRUCTION", recipeInstruction)

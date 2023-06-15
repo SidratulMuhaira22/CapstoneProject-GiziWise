@@ -1,6 +1,5 @@
 package com.hera.giziwise.home.recipe
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebView
@@ -33,7 +32,6 @@ class InstruksiRecipeActivity : AppCompatActivity() {
         val recipeIngredient = intent.getStringExtra("RECIPE_INGREDIENTS")
         val recipeImageUrl = intent.getStringExtra("RECIPE_IMAGE_URL")
 
-        // Tampilkan data pada tampilan
         recipeTitle?.let { setTitle(it) }
         recipeInstruction?.let { setInstruction(it) }
         recipeImageUrl?.let { setRecipeImage(it) }
