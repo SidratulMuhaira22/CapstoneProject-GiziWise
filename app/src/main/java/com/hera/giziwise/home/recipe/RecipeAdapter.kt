@@ -10,7 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hera.giziwise.R
 
-class RecipeAdapter(private var recipeList: List<Recipe>) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+class RecipeAdapter(
+    private var recipeList: List<Recipe>,
+    private val recipeClickListener: RecipeClickListener
+) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+
+    private var isRecipeActivity: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,6 +26,9 @@ class RecipeAdapter(private var recipeList: List<Recipe>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val recipe = recipeList[position]
         holder.bind(recipe)
+        holder.itemView.setOnClickListener {
+            recipeClickListener.onRecipeClick(recipe)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -32,21 +40,37 @@ class RecipeAdapter(private var recipeList: List<Recipe>) : RecyclerView.Adapter
         notifyDataSetChanged()
     }
 
+    fun setRecipeActivity(isRecipeActivity: Boolean) {
+        this.isRecipeActivity = isRecipeActivity
+    }
+
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val recipeImage: ImageView = itemView.findViewById(R.id.resep_image)
         private val recipeTitle: TextView = itemView.findViewById(R.id.resep_title)
 
         fun bind(recipe: Recipe) {
             recipeTitle.text = recipe.title
-            recipeTitle.maxLines = 2
-            recipeTitle.ellipsize = TextUtils.TruncateAt.END
+
+            if (isRecipeActivity) {
+                recipeTitle.maxLines = 1
+                recipeTitle.ellipsize = TextUtils.TruncateAt.END
+            } else {
+                recipeTitle.maxLines = 2
+                recipeTitle.ellipsize = null
+            }
 
             Glide.with(itemView)
                 .load(recipe.image)
                 .into(recipeImage)
         }
     }
+
+    interface RecipeClickListener {
+        fun onRecipeClick(recipe: Recipe)
+    }
 }
+
+
 
 
 

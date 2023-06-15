@@ -24,7 +24,9 @@ data class Recipe(
     val createdAt: String,
     val updatedAt: String,
     val recipeTags: List<RecipeTag>,
-    val author: Author
+    val author: Author,
+    val ingredients: String,
+    val instructions: String
 )
 
 data class RecipeTag(

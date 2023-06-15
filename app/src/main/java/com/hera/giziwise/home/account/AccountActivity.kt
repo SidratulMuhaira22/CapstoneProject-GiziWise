@@ -6,9 +6,15 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.hera.giziwise.R
 import com.hera.giziwise.databinding.ActivityAccountBinding
+import com.hera.giziwise.home.HomeActivity
+import com.hera.giziwise.home.artikel.ArticleActivity
+import com.hera.giziwise.home.camera.CameraActivity
+import com.hera.giziwise.home.recipe.RecipeActivity
 import com.hera.giziwise.login.LoginActivity
 
 class AccountActivity : AppCompatActivity() {
@@ -35,6 +41,39 @@ class AccountActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
+        }
+        // NavigationBar
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNavigationView.selectedItemId = R.id.navigation_account
+        bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    startActivity(Intent(applicationContext, HomeActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_camera -> {
+                    startActivity(Intent(applicationContext, CameraActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_articles-> {
+                    startActivity(Intent(applicationContext, ArticleActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_recipes-> {
+                    startActivity(Intent(applicationContext, RecipeActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_account -> return@setOnItemSelectedListener true
+            }
+            false
         }
     }
 

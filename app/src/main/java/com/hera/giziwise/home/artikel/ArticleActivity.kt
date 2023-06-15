@@ -7,6 +7,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -30,54 +31,27 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class ArticleActivity : AppCompatActivity(), ArticleAdapter.ArticleClickListener {
-    private lateinit var bottomNavView: BottomNavigationView
     private lateinit var articleRecyclerView: RecyclerView
     private lateinit var articleAdapter: ArticleAdapter
+    private lateinit var imageView2: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article)
 
-        bottomNavView = findViewById(R.id.nav_view)
         articleRecyclerView = findViewById(R.id.recyclerView_lainnya)
+        imageView2 = findViewById(R.id.imageView2)
 
-        bottomNavView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> {
-                    openHomeActivity()
-                    true
-                }
-                R.id.navigation_camera -> {
-                    openCameraActivity()
-                    true
-                }
-                R.id.navigation_articles -> {
-                    true
-                }
-                R.id.navigation_recipes -> {
-                    openRecipesActivity()
-                    true
-                }
-                R.id.navigation_account -> {
-                    openAccountActivity()
-                    true
-                }
-                else -> false
-            }
-        }
-
-        setIconColors(R.id.navigation_articles)
 
         val textView: TextView = findViewById(R.id.textView)
-        val imageView2: ImageView = findViewById(R.id.imageView2)
-        val imageUrl = "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/2023/04/03/Ilustrasi-diet-sehat-3832311830.jpg"
+        val imageUrl = "sehat-3832311830.jpg"
 
         Glide.with(this)
             .load(imageUrl)
             .into(imageView2)
 
         // Setel teks artikel
-        val articleText = "Ini adalah teks artikel yang panjang. Klik di sini untuk membaca lebih lanjut."
+        val articleText = "Pola dan gaya hidup modern cukup berpengaruh terhadap perubahan pola makan yang sering dikonsumsi sehari-hari."
         val spannableString = SpannableString(articleText)
 
         // Tambahkan ClickableSpan untuk teks
@@ -113,6 +87,41 @@ class ArticleActivity : AppCompatActivity(), ArticleAdapter.ArticleClickListener
         articleRecyclerView.adapter = articleAdapter
 
         fetchArticles()
+        fetchArticles1()
+
+        // NavigationBar
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNavigationView.selectedItemId = R.id.navigation_articles
+        bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    startActivity(Intent(applicationContext, HomeActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_camera -> {
+                    startActivity(Intent(applicationContext, CameraActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_articles-> return@setOnItemSelectedListener true
+                R.id.navigation_recipes-> {
+                    startActivity(Intent(applicationContext, RecipeActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_account -> {
+                    startActivity(Intent(applicationContext, AccountActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+            }
+            false
+        }
     }
 
     override fun onArticleClick(article: Article) {
@@ -121,8 +130,8 @@ class ArticleActivity : AppCompatActivity(), ArticleAdapter.ArticleClickListener
 
     private fun openDetailArticleActivity(imageUrl: String?, articleContent: String) {
         val intent = Intent(this, DetailArticleActivity::class.java)
-        intent.putExtra("image_url", imageUrl)
-        intent.putExtra("article_content", articleContent)
+        intent.putExtra("ARTICLE_IMAGE_URL", imageUrl)
+        intent.putExtra("ARTICLE_CONTENT", articleContent)
         startActivity(intent)
     }
 
@@ -135,7 +144,14 @@ class ArticleActivity : AppCompatActivity(), ArticleAdapter.ArticleClickListener
                 if (response.isSuccessful) {
                     val articleResponse = response.body()
                     val articles = articleResponse?.data?.articles ?: emptyList()
-                    articleAdapter.updateData(articles)
+
+                    // Menghapus artikel dengan ID 2
+                    val filteredArticles = articles.filter { article -> article.id != 2 }
+
+                    // Membalikkan urutan daftar artikel
+                    val reversedArticles = filteredArticles.reversed()
+
+                    articleAdapter.updateData(reversedArticles)
                 } else {
                     // Tangani kesalahan saat respons API tidak berhasil
                     Toast.makeText(this@ArticleActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
@@ -147,44 +163,36 @@ class ArticleActivity : AppCompatActivity(), ArticleAdapter.ArticleClickListener
         }
     }
 
-    private fun openHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
+    private fun fetchArticles1() {
+        val apiService = ApiConfig.getApiClient()
 
-    private fun openCameraActivity() {
-        val intent = Intent(this, CameraActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val response = apiService.getAllArticles("title", "desc", 1, 10, null, null)
+                if (response.isSuccessful) {
+                    val articleResponse = response.body()
+                    val articles = articleResponse?.data?.articles ?: emptyList()
 
-    private fun openRecipesActivity() {
-        val intent = Intent(this, RecipeActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
+                    // Cari artikel dengan ID 9
+                    val articleId9 = articles.find { it.id == 2 }
+                    if (articleId9 != null) {
+                        // Jika artikel dengan ID 9 ditemukan, ambil URL gambarnya
+                        val imageUrl = articleId9.image
 
-    private fun openAccountActivity() {
-        val intent = Intent(this, AccountActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun setIconColors(selectedItemId: Int) {
-        val menu = bottomNavView.menu
-        menu.forEach { item ->
-            val icon = item.icon
-            if (item.itemId == selectedItemId) {
-                icon?.setTintList(ContextCompat.getColorStateList(this, R.color.green))
-            } else {
-                icon?.setTintList(ContextCompat.getColorStateList(this, R.color.grey))
+                        // Muat gambar menggunakan Glide ke imageView2
+                        Glide.with(this@ArticleActivity)
+                            .load(imageUrl)
+                            .into(imageView2)
+                    }
+                } else {
+                    // Tangani kesalahan saat respons API tidak berhasil
+                    Toast.makeText(this@ArticleActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                // Tangani kesalahan saat panggilan API gagal
+                Toast.makeText(this@ArticleActivity, "Gagal memuat artikel", Toast.LENGTH_SHORT).show()
             }
         }
-
-        // Menemukan ikon artikel dan mengatur TintList-nya menjadi hijau
-        val articleIcon = menu.findItem(R.id.navigation_articles)?.icon
-        articleIcon?.setTintList(ContextCompat.getColorStateList(this, R.color.green))
     }
 
     fun goBack(view: View) {

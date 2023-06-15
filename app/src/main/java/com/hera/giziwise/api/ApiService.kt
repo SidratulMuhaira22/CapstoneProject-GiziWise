@@ -58,7 +58,7 @@ interface ApiService {
     ): Response<ArticleResponse>
 
     @GET("articles/{id}")
-    suspend fun getArticleById(@Path("id") id: String): Response<ArticleResponse>
+    suspend fun getArticleById(@Path("id") id: Int): Response<ArticleResponse>
 
     // Endpoint untuk resep
     @GET("recipes")

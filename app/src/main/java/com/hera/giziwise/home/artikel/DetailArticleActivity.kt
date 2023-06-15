@@ -41,8 +41,6 @@ class DetailArticleActivity : AppCompatActivity() {
         published.text = articlePublished
 
         contentWebView.settings.javaScriptEnabled = true
-
-        contentWebView.settings.javaScriptEnabled = true
         if (articleContent != null) {
             contentWebView.loadDataWithBaseURL(null, articleContent, "text/html", "UTF-8", null)
         }
@@ -52,6 +50,7 @@ class DetailArticleActivity : AppCompatActivity() {
         finish()
     }
 }
+
 
 
 

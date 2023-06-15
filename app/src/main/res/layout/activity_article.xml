@@ -20,7 +20,7 @@
             <EditText
                 android:id="@+id/search_article"
                 android:layout_width="0dp"
-                android:layout_height="54dp"
+                android:layout_height="44dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="15dp"
@@ -67,6 +67,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,11 +80,11 @@
                 android:layout_width="0dp"
                 android:layout_height="33dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/isi_artikel"
                 app:layout_constraintBottom_toTopOf="@+id/tips_lainnya"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -92,7 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/article_lainnya"
@@ -107,7 +108,6 @@
                 android:id="@+id/recyclerView_lainnya"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
@@ -124,9 +124,9 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         app:itemIconSize="30dp"
-        app:itemIconTint="@color/grey"
-        app:itemTextColor="@color/grey"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"/>
 
 </LinearLayout>

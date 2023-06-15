@@ -3,6 +3,7 @@ package com.hera.giziwise.home
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.hera.giziwise.R
@@ -20,6 +21,7 @@ import com.hera.giziwise.api.ApiConfig
 import com.hera.giziwise.home.artikel.Article
 import com.hera.giziwise.home.artikel.ArticleAdapter
 import com.hera.giziwise.home.artikel.DetailArticleActivity
+import com.hera.giziwise.home.recipe.BahanRecipeActivity
 import com.hera.giziwise.home.recipe.Recipe
 import com.hera.giziwise.home.recipe.RecipeAdapter
 import kotlinx.coroutines.CoroutineScope
@@ -29,7 +31,6 @@ import java.lang.Exception
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var bottomNavView: BottomNavigationView
     private lateinit var searchHomeEditText: EditText
     private lateinit var articleRecyclerView: RecyclerView
     private lateinit var recipeRecyclerView: RecyclerView
@@ -40,58 +41,10 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        bottomNavView = findViewById(R.id.nav_view)
         searchHomeEditText = findViewById(R.id.search_home)
         articleRecyclerView = findViewById(R.id.article_kesehatan_recycler_view)
         recipeRecyclerView = findViewById(R.id.resep_sehat_recycler_view)
 
-        bottomNavView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> {
-                    openHomeActivity()
-                    true
-                }
-                R.id.navigation_camera -> {
-                    openCameraActivity()
-                    true
-                }
-                R.id.navigation_articles -> {
-                    openArticleActivity()
-                    true
-                }
-                R.id.navigation_recipes -> {
-                    openRecipesActivity()
-                    true
-                }
-                R.id.navigation_account -> {
-                    openAccountActivity()
-                    true
-                }
-                else -> false
-            }
-        }
-
-        setIconColors(R.id.navigation_home)
-
-        bottomNavView.setOnNavigationItemReselectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> {
-
-                }
-                R.id.navigation_camera -> {
-
-                }
-                R.id.navigation_articles -> {
-
-                }
-                R.id.navigation_recipes -> {
-
-                }
-                R.id.navigation_account -> {
-
-                }
-            }
-        }
 
         searchHomeEditText.setOnClickListener {
             openCameraActivity()
@@ -108,13 +61,54 @@ class HomeActivity : AppCompatActivity() {
 
         // Inisialisasi RecyclerView dan Adapter untuk resep
         val recipeList = listOf<Recipe>() // Initialize an empty list or provide the actual recipe list
-        recipeAdapter = RecipeAdapter(recipeList)
+
+        recipeAdapter = RecipeAdapter(recipeList, object : RecipeAdapter.RecipeClickListener {
+            override fun onRecipeClick(recipe: Recipe) {
+                openDetailRecipeActivity(recipe)
+            }
+        })
+
         recipeRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recipeRecyclerView.adapter = recipeAdapter
 
         // Mengambil data artikel dan resep dari API
         fetchArticles()
         fetchRecipes()
+
+        // NavigationBar
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNavigationView.selectedItemId = R.id.navigation_home
+        bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.navigation_home -> return@setOnItemSelectedListener true
+
+                R.id.navigation_camera -> {
+                    startActivity(Intent(applicationContext, CameraActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_articles-> {
+                    startActivity(Intent(applicationContext, ArticleActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_recipes-> {
+                    startActivity(Intent(applicationContext, RecipeActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_account -> {
+                    startActivity(Intent(applicationContext, AccountActivity::class.java))
+                    overridePendingTransition(R.anim.slide_right, R.anim.slide_left)
+                    finish()
+                    return@setOnItemSelectedListener true
+                }
+            }
+            false
+        }
     }
 
     private fun fetchArticles() {
@@ -159,29 +153,12 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun openHomeActivity() {
-        setIconColors(R.id.navigation_home)
-    }
 
     private fun openCameraActivity() {
         val intent = Intent(this, CameraActivity::class.java)
         startActivity(intent)
     }
 
-    private fun openArticleActivity() {
-        val intent = Intent(this, ArticleActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun openRecipesActivity() {
-        val intent = Intent(this, RecipeActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun openAccountActivity() {
-        val intent = Intent(this, AccountActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun openDetailArticleActivity(article: Article) {
         val intent = Intent(this, DetailArticleActivity::class.java)
@@ -193,21 +170,19 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun setIconColors(selectedItemId: Int) {
-        val menu = bottomNavView.menu
-        menu.forEach { item ->
-            val icon = item.icon
-            if (item.itemId == selectedItemId) {
-                icon?.setTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.green)))
-            } else {
-                icon?.setTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.grey)))
-            }
-        }
+    private fun openDetailRecipeActivity(recipe: Recipe) {
+        val intent = Intent(this, BahanRecipeActivity::class.java)
+        intent.putExtra("RECIPE_ID", recipe.id)
+        intent.putExtra("RECIPE_TITLE", recipe.title)
+        intent.putExtra("RECIPE_INGREDIENTS", recipe.ingredients)
+        intent.putExtra("RECIPE_IMAGE_URL", recipe.image)
+        intent.putExtra("RECIPE_INSTRUCTIONS", recipe.instructions)
+        startActivity(intent)
     }
+
 
     override fun onResume() {
         super.onResume()
-        setIconColors(R.id.navigation_home)
     }
 
     override fun onBackPressed() {

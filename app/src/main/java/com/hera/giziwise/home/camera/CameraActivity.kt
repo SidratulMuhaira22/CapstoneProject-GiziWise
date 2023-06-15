@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.hera.giziwise.api.ApiConfig
+import com.hera.giziwise.home.HomeActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -160,6 +161,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     fun goBack(view: View) {
+        startActivity(Intent(applicationContext, HomeActivity::class.java))
         finish()
     }
 }

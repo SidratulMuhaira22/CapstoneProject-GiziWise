@@ -64,15 +64,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".home.recipe.BahanResepActivity"
-            android:exported="false"
+            android:name=".home.recipe.BahanRecipeActivity"
             android:label=" ">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".home.recipe.InstruksiResepActivity"
+            android:name=".home.recipe.InstruksiRecipeActivity"
             android:exported="false"
             android:label=" ">
             <meta-data
