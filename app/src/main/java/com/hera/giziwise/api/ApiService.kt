@@ -1,5 +1,6 @@
 package com.hera.giziwise.api
 
+import com.hera.giziwise.home.artikel.ArticleDetailResponse
 import com.hera.giziwise.home.artikel.ArticleResponse
 import com.hera.giziwise.home.camera.ProductResponse
 import com.hera.giziwise.home.recipe.RecipeResponse
@@ -58,7 +59,7 @@ interface ApiService {
     ): Response<ArticleResponse>
 
     @GET("articles/{id}")
-    suspend fun getArticleById(@Path("id") id: Int): Response<ArticleResponse>
+    suspend fun getArticleById(@Path("id") id: Int): Response<ArticleDetailResponse>
 
     // Endpoint untuk resep
     @GET("recipes")

@@ -43,3 +43,9 @@ data class Tag(
 data class Author(
     val name: String
 )
+
+data class ArticleDetailResponse(
+    val statusCode: Int,
+    val messages: List<String>,
+    val data: Article
+)
