@@ -11,6 +11,8 @@
 
     <application
         android:allowBackup="true"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -57,23 +59,20 @@
         </activity>
         <activity
             android:name=".home.recipe.RecipeActivity"
-            android:exported="false"
-            android:label=" ">
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".home.recipe.BahanRecipeActivity"
-            android:label=" ">
+            android:name=".home.recipe.BahanRecipeActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".home.recipe.InstruksiRecipeActivity"
-            android:exported="false"
-            android:label=" ">
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -113,9 +112,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
         <activity
             android:name=".ui.SplashScreenActivity"
             android:exported="true">
